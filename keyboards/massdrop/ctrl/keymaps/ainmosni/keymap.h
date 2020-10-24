@@ -51,7 +51,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define M9B59B5 {HSV_9B59B5}
 // clang-format on
 
-#define LT_CAPS LT(_NL, KC_CAPS)
+#define LT_APPS LT(_NL, KC_APP)
 #define _LAYER_ KC_TRNS
 
 //========================================================== CONFIGURABLE DEFAULTS ==========================================================
