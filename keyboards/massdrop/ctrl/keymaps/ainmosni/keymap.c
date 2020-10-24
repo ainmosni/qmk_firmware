@@ -85,20 +85,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
     [_NL] = {
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, GOLD,    GOLD,    GOLD,    GREEN,   GREEN,   GREEN,   _______,   _______, _______, _______,
-        _______, TEAL,    CYAN,    AZURE,   CYAN,    _______, _______, GOLD,    RED,     GOLD,    GREEN,   _______, _______, GREEN,     _______, _______, _______,
-        WHITE,   TEAL,    AZURE,   AZURE,   AZURE,   _______, _______, GOLD,    GOLD,    GOLD,    GREEN,   GREEN,   _______,
-        _______, _______, _______, _______, _______, _______, RED,     RED,     RED,     GREEN,   GREEN,   _______,                              _______,
-        _______, _______, _______,                   _______,                            _______, _______, _______, _______,            _______, _______, _______
+        OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,                OFF,     OFF,     OFF,
+        OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     GOLD,    GOLD,    GOLD,    GREEN,   GREEN,   GREEN,   OFF,       OFF,     OFF,     OFF,
+        OFF,     TEAL,    CYAN,    AZURE,   CYAN,    OFF,     OFF,     GOLD,    RED,     GOLD,    GREEN,   OFF,     OFF,     GREEN,     OFF,     OFF,     OFF,
+        WHITE,   TEAL,    AZURE,   AZURE,   AZURE,   OFF,     OFF,     GOLD,    GOLD,    GOLD,    GREEN,   GREEN,   OFF,
+        OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     RED,     RED,     RED,     GREEN,   GREEN,   OFF,                                  OFF,
+        OFF,     OFF,     OFF,                       OFF,                                OFF,     OFF,     OFF,     OFF,                OFF,     OFF,     _______
     },
     [_FL] = {
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,            RED,     GREEN,   _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   RED,     GREEN,   AZURE,
-        _______, GOLD,    CORAL,   _______, _______, _______, _______, _______, MAGENT,  BLUE,    WHITE,   GOLD,    GOLD,    _______,   ORANGE,  ORANGE,  AZURE,
-        _______, GOLD,    CORAL,   _______, _______, _______, _______, RED,     {1,0,0}, CYAN,    M9B59B5, _______, _______,
-        _______, RED,     _______, _______, _______, RED,     PINK,    YELLOW,  GREEN,   CREAM,   _______, _______,                              _______,
-        _______, _______, _______,                   _______,                            _______, WHITE,   _______, _______,            CORAL,   _______, CORAL
+        OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,                RED,     GREEN,   OFF,
+        OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,     OFF,       RED,     GREEN,   AZURE,
+        OFF,     GOLD,    CORAL,   OFF,     OFF,     OFF,     OFF,     OFF,     MAGENT,  BLUE,    WHITE,   GOLD,    GOLD,    OFF,       ORANGE,  ORANGE,  AZURE,
+        OFF,     GOLD,    CORAL,   OFF,     OFF,     OFF,     OFF,     RED,     {1,0,0}, CYAN,    M9B59B5, OFF,     OFF,
+        OFF,     RED,     OFF,     OFF,     OFF,     RED,     PINK,    YELLOW,  GREEN,   CREAM,   OFF,     OFF,                                  OFF,
+        OFF,     OFF,     OFF,                       OFF,                                OFF,     WHITE,   OFF,     OFF,                CORAL,   OFF,     CORAL
     },
 };
 #    undef _______
@@ -227,6 +227,8 @@ void set_layer_color(int layer) {
             RGB   rgb = hsv_to_rgb(hsv);
             float f   = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
             rgb_matrix_set_color(i, f * rgb.r, f * rgb.g, f * rgb.b);
+        } else if (hsv.h == 0 || hsv.s == 0 || hsv.v == 0) {
+            if (i != 1 && i != 5) rgb_matrix_set_color(i, 0, 0, 0);
         } else if (layer == _FL) {
             HSV hsv2   = {rgb_matrix_config.hsv.h, rgb_matrix_config.hsv.s, rgb_matrix_config.hsv.v};
             HSV hui    = hsv2;

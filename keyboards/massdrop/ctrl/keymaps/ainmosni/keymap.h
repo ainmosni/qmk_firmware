@@ -43,6 +43,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PURPLE {HSV_PURPLE}
 #define MAGENT {HSV_MAGENTA}
 #define PINK {HSV_PINK}
+#define HSV_OFF 0,0,0
+#define OFF {HSV_OFF}
 #define HSV_CREAM 24, 240, 255
 #define CREAM {HSV_CREAM}
 #define HSV_9B59B5 208, 192, 255
